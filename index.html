@@ -112,41 +112,5 @@
   }
 })();
 </script>
-(async function () {
-  const SUPABASE_URL = "https://jsiytdnmrjdkenobahgk.supabase.co";
-
-  const SUPABASE_PUBLISHABLE_KEY >p
-    "sb_publishable_z5fvqxfYXb5CVVmKCls5aA_1lMZpzxC";
-
-  const client = supabase.createClient(
-    SUPABASE_URL,
-    SUPABASE_PUBLISHABLE_KEY
-  );
-</script>
-
-
-  // Generate or reuse this tab's session ID
-  let sessionId = sessionStorage.getItem("visitor_session_id");
-
-  if (!sessionId) {
-    sessionId = crypto.randomUUID();
-    sessionStorage.setItem("visitor_session_id", sessionId);
-  }
-
-  // Record the page visit
-  const { error } = await client
-    .from("visits")
-    .insert({
-      session_id: sessionId,
-      page_path: window.location.pathname
-    });
-
-  if (error) {
-    console.error("Visitor tracking error:", error.message);
-  } else {
-    console.log("Visitor recorded successfully!");
-  }
-})();
-</script>
 </body>
 </html>
