@@ -56,19 +56,6 @@
   </footer>
 <!-- Supabase visitor tracking -->
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
-<script>
-(async function () {
-  const SUPABASE_URL = "https://jsiytdnmrjdkenobahgk.supabase.co/rest/v1/";
-
-  const SUPABASE_PUBLISHABLE_KEY =
-    "sb_publishable_z5fvqxfYXb5CVVmKCls5aA_1lMZpzxC";
-
-  const client = supabase.createClient(
-    SUPABASE_URL,
-    SUPABASE_PUBLISHABLE_KEY
-  );
-  
 <div id="tracking-status"
      style="padding:15px;margin:15px;
      background:#eeeeee;color:#222;
@@ -124,7 +111,18 @@
       (error.code ? " | Code: " + error.code : "");
   }
 })();
+</script>
+(async function () {
+  const SUPABASE_URL = "https://jsiytdnmrjdkenobahgk.supabase.co/rest/v1/";
 
+  const SUPABASE_PUBLISHABLE_KEY >p
+    "sb_publishable_z5fvqxfYXb5CVVmKCls5aA_1lMZpzxC";
+
+  const client = supabase.createClient(
+    SUPABASE_URL,
+    SUPABASE_PUBLISHABLE_KEY
+  );
+</script>
 
 
   // Generate or reuse this tab's session ID
