@@ -68,6 +68,64 @@
     SUPABASE_URL,
     SUPABASE_PUBLISHABLE_KEY
   );
+  
+<div id="tracking-status"
+     style="padding:15px;margin:15px;
+     background:#eeeeee;color:#222;
+     border-radius:8px;">
+  Checking visitor tracking...
+</div>
+
+<script>
+(async function () {
+  const status = document.getElementById("tracking-status");
+
+  try {
+    const SUPABASE_URL = "YOUR_PROJECT_URL";
+    const SUPABASE_PUBLISHABLE_KEY = "YOUR_PUBLISHABLE_KEY";
+
+    if (!window.supabase) {
+      throw new Error("Supabase library did not load.");
+    }
+
+    const client = window.supabase.createClient(
+      SUPABASE_URL,
+      SUPABASE_PUBLISHABLE_KEY
+    );
+
+    let sessionId =
+      sessionStorage.getItem("visitor_session_id");
+
+    if (!sessionId) {
+      sessionId = crypto.randomUUID();
+      sessionStorage.setItem("visitor_session_id", sessionId);
+    }
+
+    const { error } = await client
+      .from("visits")
+      .insert({
+        session_id: sessionId,
+        page_path: location.pathname
+      });
+
+    if (error) {
+      throw error;
+    }
+
+    status.textContent =
+      "SUCCESS: Visitor recorded in Supabase!";
+
+  } catch (error) {
+    console.error("Tracking error:", error);
+
+    status.textContent =
+      "TRACKING ERROR: " +
+      (error.message || "Unknown error") +
+      (error.code ? " | Code: " + error.code : "");
+  }
+})();
+</script>
+
 
   // Generate or reuse this tab's session ID
   let sessionId = sessionStorage.getItem("visitor_session_id");
